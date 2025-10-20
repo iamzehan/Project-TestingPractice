@@ -4,6 +4,7 @@ import {
   calculator,
   caesarCipher,
   analyzeArray,
+  shifter
 } from "./test";
 
 test("Capitalizes the first letter", () => {
@@ -26,6 +27,7 @@ test("CaesarCipher", () => {
   expect(caesarCipher("xyz", 3)).toBe("abc");
   expect(caesarCipher("HeLLo", 3)).toBe("KhOOr");
   expect(caesarCipher("Hello, World!", 3)).toBe("Khoor, Zruog!");
+  expect(shifter("ABCDEF", 1)).toEqual("BCDEFA");
 });
 
 test("Analyze array", () => {

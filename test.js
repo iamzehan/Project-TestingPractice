@@ -24,9 +24,13 @@ export const calculator = (function () {
   };
 })();
 
+export function shifter(alphabets, key) {
+  return alphabets.slice(key,) + alphabets.slice(0, key);
+}
+
 export function caesarCipher(string, key) {
-  const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  const lowerCase = "abcdefghijklmnopqrstuvwxyz".split("");
+  const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const lowerCase = "abcdefghijklmnopqrstuvwxyz";
 
   const indexes = []; // keep record of the indexes of the sent string
   string.split("").forEach((value) => {
@@ -35,22 +39,16 @@ export function caesarCipher(string, key) {
     else indexes.push(value);
   });
 
-  function shifter(alphabets) {
-    // now shift according to the key
-    const shift = alphabets.splice(0, key);
-    alphabets.push(...shift); // add them to the end of the alphabets
-    return alphabets;
-  }
-
-  shifter(lowerCase);
-  shifter(upperCase);
-
+  // now shift 
+  const shiftedLower = shifter(lowerCase, key);
+  const shiftedUpper = shifter(upperCase, key);
+  // now cipher
   indexes.forEach((index, idx) => {
     if (typeof index == "number") {
-      if (index > 100) indexes[idx] = upperCase[index - 100];
-      else if (index < 100) indexes[idx] = lowerCase[index];
+      if (index > 100) indexes[idx] = shiftedUpper[index - 100];
+      else if (index < 100) indexes[idx] = shiftedLower[index];
     }
-  }); // cipher
+  });
   return indexes.join("");
 }
 
@@ -60,9 +58,9 @@ export function analyzeArray(array) {
   const max = () => Math.max(...array);
   const length = () => array.length;
   return {
-    average:average(),
+    average: average(),
     min: min(),
-    max:max(),
-    length:length(),
-  }
+    max: max(),
+    length: length(),
+  };
 }
