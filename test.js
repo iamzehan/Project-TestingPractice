@@ -55,10 +55,14 @@ export function caesarCipher(string, key) {
 }
 
 export function analyzeArray(array) {
+  const average = () => array.reduce((a, b) => a + b, 0) / array.length;
+  const min = () => Math.min(...array);
+  const max = () => Math.max(...array);
+  const length = () => array.length;
   return {
-    average: array.reduce((a, b) => a + b, 0) / array.length,
-    min: Math.min(...array),
-    max: Math.max(...array),
-    length: array.length,
-  };
+    average:average(),
+    min: min(),
+    max:max(),
+    length:length(),
+  }
 }
